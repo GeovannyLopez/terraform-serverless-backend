@@ -2,3 +2,8 @@ output "vpc_id" {
   description = "The ID of the VPC"
   value       = "${module.vpc.vpc_id}"
 }
+
+output "base_url" {
+  description = "Base url of api gateway"
+  value       = "${module.apiGateway.base_url}"
+}
