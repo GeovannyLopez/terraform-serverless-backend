@@ -15,7 +15,7 @@ variable "invoke_arn" {
   type        = string
 }
 
-variable "get_function_name" {
-  description = "Function name for GET lambda"
+variable "get_function_arn" {
+  description = "Arn for GET lambda"
   type        = string
 }

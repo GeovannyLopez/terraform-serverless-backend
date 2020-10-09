@@ -19,3 +19,8 @@ variable "table_arn" {
   description = "Arn of table to be used by lambda functions"
   type        = string
 }
+
+variable "s3_bucket" {
+  description = "Bucket where lambda functions code is located"
+  type        = string
+}

@@ -15,3 +15,9 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
+
+variable "s3_bucket" {
+  description = "Bucket where lambda functions code is located"
+  type        = string
+  default = "geovanny-terraform-serverless"
+}

@@ -8,7 +8,7 @@ output "invoke_arn" {
   value       = aws_lambda_function.get.invoke_arn
 }
 
-output "get_function_name" {
+output "get_function_arn" {
   description = "Name of the get function"
-  value       = aws_lambda_function.get.function_name
+  value       = aws_lambda_function.get.arn
 }

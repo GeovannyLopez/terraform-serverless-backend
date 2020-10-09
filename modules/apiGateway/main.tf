@@ -60,14 +60,13 @@ resource "aws_api_gateway_deployment" "deploy" {
 }
 
 
-resource "aws_lambda_permission" "apigw" {
-   statement_id  = "AllowAPIGatewayInvoke"
-   action        = "lambda:InvokeFunction"
-   function_name = var.get_function_name
-   principal     = "apigateway.amazonaws.com"
+resource "aws_lambda_permission" "api-gateway-invoke-get-lambda" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = var.get_function_arn
+  principal     = "apigateway.amazonaws.com"
 
-   # The "/*/*" portion grants access from any method on any resource
-   # within the API Gateway REST API.
-   source_arn = "${aws_api_gateway_rest_api.gateway.execution_arn}/*/*"
+  # The /*/* portion grants access from any method on any resource
+  # within the specified API Gateway.
+  source_arn = "${aws_api_gateway_rest_api.gateway.execution_arn}/*/*"
 }
-

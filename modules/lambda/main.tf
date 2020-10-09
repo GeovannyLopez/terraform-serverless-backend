@@ -9,14 +9,39 @@ resource "aws_lambda_function" "get" {
    function_name = "get-${var.environment}"
 
    # The bucket name as created earlier with "aws s3api create-bucket"
-   s3_bucket = "geovanny-terraform-serverless"
+   s3_bucket = var.s3_bucket
    s3_key    = "v1.0.0/get.zip"
 
    # "main" is the filename within the zip file (main.js) and "handler"
    # is the name of the property under which the handler function was
    # exported in that file.
    handler = "main.handler"
-   runtime = "nodejs10.x"
+   runtime = "nodejs12.x"
+
+   role = aws_iam_role.lambda_exec.arn
+
+   environment {
+    variables = {
+      GAMES_TABLE = var.table_name
+    }
+  }
+}
+
+###################
+# Post Lambda
+###################
+resource "aws_lambda_function" "post" {
+   function_name = "post-${var.environment}"
+
+   # The bucket name as created earlier with "aws s3api create-bucket"
+   s3_bucket = var.s3_bucket
+   s3_key    = "v1.0.0/post.zip"
+
+   # "main" is the filename within the zip file (main.js) and "handler"
+   # is the name of the property under which the handler function was
+   # exported in that file.
+   handler = "main.handler"
+   runtime = "nodejs12.x"
 
    role = aws_iam_role.lambda_exec.arn
 
@@ -52,7 +77,7 @@ EOF
 
 resource "aws_iam_role_policy" "dynamodb-lambda-policy"{
   name = "dynamodb_lambda_policy"
-  role = "${aws_iam_role.lambda_exec.id}"
+  role = aws_iam_role.lambda_exec.id
   policy = <<EOF
 {
   "Version": "2012-10-17",
