@@ -9,3 +9,9 @@ variable "environment" {
   type        = string
   default     = "qa"
 }
+
+variable "region" {
+  description = "Region used to deploy the template"
+  type        = string
+  default     = "us-east-1"
+}

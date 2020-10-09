@@ -7,3 +7,7 @@ output "base_url" {
   description = "Base url of api gateway"
   value       = "${module.apiGateway.base_url}"
 }
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}

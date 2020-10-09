@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 module "vpc" {
@@ -26,4 +26,8 @@ module "lambda" {
   source = "./modules/lambda"
   environment = var.environment
   owner = var.owner
+  table_arn = "${module.dynamo.table_arn}"
+  table_name = "${module.dynamo.table_name}"
 }
+
+data "aws_caller_identity" "current" {}

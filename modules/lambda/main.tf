@@ -19,6 +19,12 @@ resource "aws_lambda_function" "get" {
    runtime = "nodejs10.x"
 
    role = aws_iam_role.lambda_exec.arn
+
+   environment {
+    variables = {
+      GAMES_TABLE = var.table_name
+    }
+  }
 }
 
  # IAM role which dictates what other AWS services the Lambda function
@@ -42,4 +48,33 @@ resource "aws_iam_role" "lambda_exec" {
 }
 EOF
 
+}
+
+resource "aws_iam_role_policy" "dynamodb-lambda-policy"{
+  name = "dynamodb_lambda_policy"
+  role = "${aws_iam_role.lambda_exec.id}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+          "dynamodb:BatchGet*",
+          "dynamodb:DescribeStream",
+          "dynamodb:DescribeTable",
+          "dynamodb:Get*",
+          "dynamodb:Query",
+          "dynamodb:Scan",
+          "dynamodb:BatchWrite*",
+          "dynamodb:CreateTable",
+          "dynamodb:Delete*",
+          "dynamodb:Update*",
+          "dynamodb:PutItem"
+      ],
+      "Resource": "${var.table_arn}"
+    }
+  ]
+}
+EOF
 }

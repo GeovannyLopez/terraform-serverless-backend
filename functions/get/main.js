@@ -1,12 +1,17 @@
 'use strict'
 
-exports.handler = function (event, context, callback) {
-  var response = {
+const DynamoTable = require('./services/dynamo')
+
+const gamesTable = new DynamoTable(process.env.GAMES_TABLE)
+
+exports.handler = async (event, context, callback) => {
+  const games = await gamesTable.scan()
+  const response = {
     statusCode: 200,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
     },
-    body: '<p>Hello world!</p>',
+    body: games
   }
   callback(null, response)
 }
