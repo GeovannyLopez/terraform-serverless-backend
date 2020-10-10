@@ -21,21 +21,10 @@ exports.handler = async (event) => {
     const response = {
       message: "Ok!"
     }
-    return lambda_response(200, response)
+    return response
 
   } catch (error) {
     console.error(error)
     throw error
-  }
-}
-
-async function lambda_response(status, body) {
-  return {
-    statusCode: status,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify(body)
   }
 }
