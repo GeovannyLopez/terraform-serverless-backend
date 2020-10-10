@@ -5,13 +5,14 @@ const { uuid } = require('uuidv4');
 
 const gamesTable = new DynamoTable(process.env.GAMES_TABLE)
 
-exports.handler = async (event) => {
+exports.handler = async (event, context, callback) => {
   try {
     console.debug('processing event', { context: event })
 
+    const request = JSON.parse(event.body)
     const newGame = {
       gameId: uuid(),
-      ...event
+      ...request
     }
 
     console.debug('Inserted game', newGame)

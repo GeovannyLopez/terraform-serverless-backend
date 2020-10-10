@@ -21,6 +21,8 @@ module "apiGateway" {
   get_invoke_arn = module.lambda.get_invoke_arn
   get_function_arn = module.lambda.get_function_arn
   get_function_name = module.lambda.get_function_name
+  post_invoke_arn = module.lambda.post_invoke_arn
+  post_function_arn = module.lambda.post_function_arn
 }
 
 module "lambda" {

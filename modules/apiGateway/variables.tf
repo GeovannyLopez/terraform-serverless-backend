@@ -23,3 +23,13 @@ variable "get_function_arn" {
 variable "get_function_name" {
   type        = string
 }
+
+variable "post_invoke_arn" {
+  description = "The invoke arn of lambda function"
+  type        = string
+}
+
+variable "post_function_arn" {
+  description = "Arn for POST lambda"
+  type        = string
+}
