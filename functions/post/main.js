@@ -18,10 +18,18 @@ exports.handler = async (event) => {
 
     await gamesTable.create(newGame)
 
-    const response = {
-      message: "Ok!"
+    const body = {
+      message: "Created"
     }
-    return response
+
+    const response = {
+      "statusCode": 200,
+      "headers": {},
+      "body": JSON.stringify(body),
+      "isBase64Encoded": false
+    };
+
+    callback(null, response);
 
   } catch (error) {
     console.error(error)

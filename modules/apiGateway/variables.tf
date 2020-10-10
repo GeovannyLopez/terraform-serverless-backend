@@ -10,12 +10,16 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "invoke_arn" {
+variable "get_invoke_arn" {
   description = "The invoke arn of lambda function"
   type        = string
 }
 
 variable "get_function_arn" {
   description = "Arn for GET lambda"
+  type        = string
+}
+
+variable "get_function_name" {
   type        = string
 }

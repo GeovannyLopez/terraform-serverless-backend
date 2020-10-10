@@ -18,8 +18,9 @@ module "apiGateway" {
   source = "./modules/apiGateway"
   environment = var.environment
   owner = var.owner
-  invoke_arn = "${module.lambda.invoke_arn}"
-  get_function_arn = "${module.lambda.get_function_arn}"
+  get_invoke_arn = module.lambda.get_invoke_arn
+  get_function_arn = module.lambda.get_function_arn
+  get_function_name = module.lambda.get_function_name
 }
 
 module "lambda" {
